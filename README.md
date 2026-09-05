@@ -10,7 +10,7 @@
 
 ## 📖 About
 
-WonderQuest is a text-based adventure game inspired by *Alice's Adventures in Wonderland*, built as a course project (COMP 206) to apply object-oriented programming principles to an interactive, file-driven game world.
+WonderQuest is a text-based adventure game inspired by *Alice's Adventures in Wonderland*, built to apply object-oriented programming principles to an interactive, file-driven game world.
 
 Rather than hard-coding the world into the program, WonderQuest reads its **locations, items, and characters** from external text files at runtime and assembles them into a live, explorable map — so the entire game world can be edited or expanded without touching a line of C++.
 
