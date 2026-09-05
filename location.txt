@@ -1,0 +1,15 @@
+Halls of Door|You've landed in a long, low hall lined with locked doors of every size. A glass table in the middle holds a bottle labelled DRINK ME and a curiously small second key. A tiny door is set into one wall — far too small to fit through at your normal size. Passages lead off in several directions.|N:Duchess's Kitchen, E:Cheshire Cat's Wood, W:Caterpillar's Mushroom, S:Pool of Tears
+
+Pool of Tears|You're wading through a vast pool of salty tears — your own, cried earlier when you were a giant. Strange creatures paddle past, including a nervous Mouse swimming alongside you.|N:Halls of Door, E:Cheshire Cat's Wood, W:Caterpillar's Mushroom
+
+Caterpillar's Mushroom|A giant mushroom grows here. Atop it sits a Caterpillar, calmly smoking a hookah and watching you. The mushroom's cap has two edges — one to the left, one to the right — that look like they could be broken off.|E:Halls of Door, S:Queen's Croquet Ground
+
+Duchess's Kitchen|A chaotic, smoke-filled kitchen. The Duchess sits nursing a squalling baby while a Cook stirs an enormous pot and hurls dishes about. Pepper hangs thick in the air.|S:Cheshire Cat's Wood, N:The Beautiful Garden
+
+Cheshire Cat's Wood|A gnarled wood with a wide branching tree. A grinning Cheshire Cat lounges on a branch above, fading in and out of view as it speaks.|W:Pool of Tears
+
+Queen's Croquet Ground|A sprawling lawn where playing-card gardeners are frantically painting white roses red. Flamingos are used as croquet mallets, hedgehogs as balls. You can feel that the Queen of Hearts is nearby — and she does not tolerate mistakes.|E:The Courtroom, N:Caterpillar's Mushroom
+
+The Courtroom|A grand courtroom where the Knave of Hearts stands accused of stealing tarts. The Queen of Hearts sits on her throne, pounding the arm and shouting for sentences before verdicts. In the corner, a Mock Turtle sits sobbing quietly to himself, seemingly ignored by the chaos around him. This feels like a very dangerous place to linger.|W:Queen's Croquet Ground
+
+The Beautiful Garden|Sunlight pours over a garden of impossibly bright flowers and fountains. This lovely, peaceful garden feels like a place of safety, far from the Queen's temper - the perfect place to rest and keep your treasures. You have found your way home.|S:Halls of Door
