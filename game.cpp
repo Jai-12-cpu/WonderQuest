@@ -602,7 +602,6 @@ void Game::printRoomState()
             cout<<endl;
         }
     }
-    cout << "\nEnter command (N/S/E/W, GO <dir>, PICK <item>, DROP <item>, USE <item>, TALK <char>, PROVE, LOOK, INVENTORY, SCORE, QUIT): ";
 }
 
 bool Game::processCommand(const string &rawInput)
