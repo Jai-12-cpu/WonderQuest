@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WonderQuest — a text adventure</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #0b1220; color: #d7e2f0;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100%;
+  }
+  #wrap {
+    max-width: 900px; margin: 0 auto; padding: 24px 16px 40px;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  header { padding-bottom: 16px; border-bottom: 1px solid #24344f; margin-bottom: 16px; }
+  h1 { font-size: 22px; margin: 0 0 4px; color: #7fe3b4; letter-spacing: 1px; }
+  header p { margin: 0; font-size: 13px; color: #7f93b3; }
+  header a { color: #7fe3b4; }
+  #terminal {
+    flex: 1; background: #060b14; border: 1px solid #24344f; border-radius: 6px;
+    padding: 16px; overflow-y: auto; white-space: pre-wrap; word-wrap: break-word;
+    font-size: 14px; line-height: 1.5; min-height: 420px; max-height: 65vh;
+  }
+  #controls { margin-top: 14px; text-align: center; }
+  #startBtn {
+    background: #16a97c; color: #04150f; border: none; padding: 12px 28px;
+    font-family: inherit; font-weight: 700; font-size: 15px; border-radius: 6px; cursor: pointer;
+  }
+  #startBtn:hover { background: #1ec996; }
+  #startBtn:disabled { opacity: 0.5; cursor: default; }
+  #status { margin-top: 10px; font-size: 12px; color: #556a8c; text-align: center; }
+  .loading-dot { animation: blink 1.2s infinite; }
+  @keyframes blink { 50% { opacity: 0.2; } }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <header>
+    <h1>WonderQuest</h1>
+    <p>A C++ text adventure through Wonderland, compiled to WebAssembly and running live in this page. Source on <a href="https://github.com/jai-12-cpu/wonderquest" target="_blank" rel="noopener">GitHub</a>.</p>
+  </header>
+
+  <div id="terminal">Click "Start Game" below to begin. Wonderland is loading<span class="loading-dot">...</span></div>
+
+  <div id="controls">
+    <button id="startBtn" disabled>Loading...</button>
+  </div>
+  <div id="status">Each command opens a popup showing everything so far, with a box to type your next command.</div>
+</div>
+
+<script>
+  var terminalEl = document.getElementById('terminal');
+  var startBtn = document.getElementById('startBtn');
+  var statusEl = document.getElementById('status');
+  var firstOutput = true;
+  var ready = false;
+  var transcript = '';
+
+  function printLine(text) {
+    if (firstOutput) {
+      terminalEl.textContent = '';
+      firstOutput = false;
+    }
+    transcript += text + '\n';
+    terminalEl.textContent += text + '\n';
+    terminalEl.scrollTop = terminalEl.scrollHeight;
+  }
+
+  var charQueue = [];
+
+  var Module = {
+    print: function(text) { printLine(text); },
+    printErr: function(text) { console.error(text); },
+    stdin: function() {
+      if (charQueue.length > 0) {
+        return charQueue.shift();
+      }
+      // Show the full transcript so far directly in the dialog itself,
+      // since native dialogs render even though the page behind them can't repaint.
+      var recentTranscript = transcript.split('\n').slice(-25).join('\n');
+      var line = window.prompt(recentTranscript + '\n\nEnter your command:');
+      if (line === null) {
+        return null; // EOF -> game exits gracefully
+      }
+      charQueue = line.split('').map(function(c) { return c.charCodeAt(0); });
+      charQueue.push(10);
+      return charQueue.shift();
+    },
+    onRuntimeInitialized: function() {
+      ready = true;
+      startBtn.disabled = false;
+      startBtn.textContent = 'Start Game';
+      statusEl.textContent = 'Ready. Click Start Game — each popup shows the latest game text plus a box to type your next move.';
+    }
+  };
+
+  startBtn.addEventListener('click', function() {
+    if (!ready) return;
+    startBtn.disabled = true;
+    startBtn.textContent = 'Game running...';
+    Module.callMain([]);
+    startBtn.textContent = 'Game finished — refresh to play again';
+  });
+</script>
+<script src="game.js"></script>
+</body>
+</html>
