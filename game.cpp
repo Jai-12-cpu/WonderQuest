@@ -1,10 +1,3 @@
-﻿/*
- * Course: COMP 206
- * Assignment: Assignment 4
- * Name: Jai Srinivasan Sivaraj
- * Student ID: 3806075
- */
-
 #include <iostream>
 #include <map> 
 #include <fstream> 
